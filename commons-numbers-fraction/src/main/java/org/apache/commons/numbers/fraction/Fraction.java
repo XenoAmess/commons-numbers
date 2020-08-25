@@ -98,6 +98,9 @@ public final class Fraction
     /** The overflow limit for conversion from a double (2^31). */
     private static final long OVERFLOW = 1L << 31;
 
+    /** The denominator must not be zero String. */
+    private static final String STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO = "The denominator must not be zero";
+
     /** The numerator of this fraction reduced to lowest terms. */
     private final int numerator;
 
@@ -499,13 +502,13 @@ public final class Fraction
      */
     public static Fraction of(final int whole, final int numerator, final int denominator) {
         if (denominator == 0) {
-            throw new ArithmeticException("The denominator must not be zero");
+            throw new ArithmeticException(STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO);
         }
         if (denominator < 0) {
-            throw new ArithmeticException("The denominator must not be negative");
+            throw new ArithmeticException(STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO);
         }
         if (numerator < 0) {
-            throw new ArithmeticException("The numerator must not be negative");
+            throw new ArithmeticException(STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO);
         }
         long numeratorValue;
         if (whole < 0) {
@@ -527,7 +530,7 @@ public final class Fraction
      * @throws ArithmeticException if the continued fraction failed to converge.
      * @return a new instance.
      * @deprecated please use from instead.
-     * @see #from(double) 
+     * @see #from(double)
      */
     @Deprecated
     public static Fraction getFraction(final double value) {
@@ -1178,14 +1181,14 @@ public final class Fraction
         }
         if (this.denominator == 0) {
             if (exponent > 0) {
-                throw new ArithmeticException("The denominator must not be zero");
+                throw new ArithmeticException(STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO);
             } else {
                 return ZERO;
             }
         }
         if (this.numerator == 0) {
             if (exponent < 0) {
-                throw new ArithmeticException("The denominator must not be zero");
+                throw new ArithmeticException(STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO);
             } else {
                 return ZERO;
             }
@@ -1246,13 +1249,13 @@ public final class Fraction
      * @return a string representation of the fraction.
      */
     public String toProperString() {
-        if (toProperString == null) {
+        if (this.toProperString == null) {
             if (numerator == 0) {
-                toProperString = "0";
+                this.toProperString = "0";
             } else if (numerator == denominator) {
-                toProperString = "1";
+                this.toProperString = "1";
             } else if (numerator == -1 * denominator) {
-                toProperString = "-1";
+                this.toProperString = "-1";
             } else if ((numerator > 0 ? -numerator : numerator) < -denominator) {
                 // note that we do the magnitude comparison test above with
                 // NEGATIVE (not positive) numbers, since negative numbers
@@ -1260,15 +1263,15 @@ public final class Fraction
                 // is handled incorrectly.
                 final int properNumerator = getProperNumerator();
                 if (properNumerator == 0) {
-                    toProperString = Integer.toString(getProperWhole());
+                    this.toProperString = Integer.toString(getProperWhole());
                 } else {
-                    toProperString = getProperWhole() + " " + properNumerator + "/" + getDenominator();
+                    this.toProperString = getProperWhole() + " " + properNumerator + "/" + getDenominator();
                 }
             } else {
-                toProperString = getNumerator() + "/" + getDenominator();
+                this.toProperString = getNumerator() + "/" + getDenominator();
             }
         }
-        return toProperString;
+        return this.toProperString;
     }
 
     /**

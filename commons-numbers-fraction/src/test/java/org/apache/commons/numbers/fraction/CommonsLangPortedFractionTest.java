@@ -1,30 +1,27 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.commons.numbers.fraction;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for the {@link Fraction} class
@@ -296,7 +293,7 @@ public class CommonsLangPortedFractionTest {
         assertEquals(3, f.getDenominator());
 
         // small
-        f = Fraction.getFraction(1.0d/10001d);
+        f = Fraction.getFraction(1.0d / 10001d);
         assertEquals(1, f.getNumerator());
         assertEquals(10001, f.getDenominator());
 
@@ -312,7 +309,7 @@ public class CommonsLangPortedFractionTest {
             }
         }
         // save time by skipping some tests!  (
-        for (int i = 1001; i <= 10000; i+=SKIP) {  // denominator
+        for (int i = 1001; i <= 10000; i += SKIP) {  // denominator
             for (int j = 1; j <= i; j++) {  // numerator
                 f = Fraction.getFraction((double) j / (double) i, 1e-8, 100);
                 f2 = Fraction.getReducedFraction(j, i);
@@ -549,9 +546,9 @@ public class CommonsLangPortedFractionTest {
         assertEquals(3, f.getDenominator());
 
         // large values
-        f = Fraction.getFraction(Integer.MAX_VALUE-1, Integer.MAX_VALUE);
+        f = Fraction.getFraction(Integer.MAX_VALUE - 1, Integer.MAX_VALUE);
         f = f.negate();
-        assertEquals(Integer.MIN_VALUE+2, f.getNumerator());
+        assertEquals(Integer.MIN_VALUE + 2, f.getNumerator());
         assertEquals(Integer.MAX_VALUE, f.getDenominator());
 
         Fraction.getFraction(Integer.MIN_VALUE, 1).negate();
@@ -735,17 +732,17 @@ public class CommonsLangPortedFractionTest {
         f = f2.add(f1);
         assertSame(f2, f);
 
-        f1 = Fraction.getFraction(-1, 13*13*2*2);
-        f2 = Fraction.getFraction(-2, 13*17*2);
+        f1 = Fraction.getFraction(-1, 13 * 13 * 2 * 2);
+        f2 = Fraction.getFraction(-2, 13 * 17 * 2);
         final Fraction fr = f1.add(f2);
-        assertEquals(13*13*17*2*2, fr.getDenominator());
-        assertEquals(-17 - 2*13*2, fr.getNumerator());
+        assertEquals(13 * 13 * 17 * 2 * 2, fr.getDenominator());
+        assertEquals(-17 - 2 * 13 * 2, fr.getNumerator());
 
         assertThrows(NullPointerException.class, () -> fr.add(null));
 
         // if this fraction is added naively, it will overflow.
         // check that it doesn't.
-        f1 = Fraction.getFraction(1, 32768*3);
+        f1 = Fraction.getFraction(1, 32768 * 3);
         f2 = Fraction.getFraction(1, 59049);
         f = f1.add(f2);
         assertEquals(52451, f.getNumerator());
@@ -754,7 +751,7 @@ public class CommonsLangPortedFractionTest {
         f1 = Fraction.getFraction(Integer.MIN_VALUE, 3);
         f2 = Fraction.ONE_THIRD;
         f = f1.add(f2);
-        assertEquals(Integer.MIN_VALUE+1, f.getNumerator());
+        assertEquals(Integer.MIN_VALUE + 1, f.getNumerator());
         assertEquals(3, f.getDenominator());
 
         f1 = Fraction.getFraction(Integer.MAX_VALUE - 1, 1);
@@ -767,9 +764,7 @@ public class CommonsLangPortedFractionTest {
         assertThrows(ArithmeticException.class, () -> overflower.add(Fraction.ONE)); // should overflow
 
         // denominator should not be a multiple of 2 or 3 to trigger overflow
-        assertThrows(
-                ArithmeticException.class,
-                () -> Fraction.getFraction(Integer.MIN_VALUE, 5).add(Fraction.getFraction(-1, 5)));
+        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(Integer.MIN_VALUE, 5).add(Fraction.getFraction(-1, 5)));
 
         final Fraction maxValue = Fraction.getFraction(-Integer.MAX_VALUE, 1);
         assertThrows(ArithmeticException.class, () -> maxValue.add(maxValue));
@@ -840,7 +835,7 @@ public class CommonsLangPortedFractionTest {
 
         // if this fraction is subtracted naively, it will overflow.
         // check that it doesn't.
-        f1 = Fraction.getFraction(1, 32768*3);
+        f1 = Fraction.getFraction(1, 32768 * 3);
         f2 = Fraction.getFraction(1, 59049);
         f = f1.subtract(f2);
         assertEquals(-13085, f.getNumerator());
@@ -849,37 +844,28 @@ public class CommonsLangPortedFractionTest {
         f1 = Fraction.getFraction(Integer.MIN_VALUE, 3);
         f2 = Fraction.ONE_THIRD.negate();
         f = f1.subtract(f2);
-        assertEquals(Integer.MIN_VALUE+1, f.getNumerator());
+        assertEquals(Integer.MIN_VALUE + 1, f.getNumerator());
         assertEquals(3, f.getDenominator());
 
         f1 = Fraction.getFraction(Integer.MAX_VALUE, 1);
         f2 = Fraction.ONE;
         f = f1.subtract(f2);
-        assertEquals(Integer.MAX_VALUE-1, f.getNumerator());
+        assertEquals(Integer.MAX_VALUE - 1, f.getNumerator());
         assertEquals(1, f.getDenominator());
 
         // Should overflow
-        assertThrows(
-                ArithmeticException.class,
-                () -> Fraction.getFraction(1, Integer.MAX_VALUE).subtract(Fraction.getFraction(1, Integer.MAX_VALUE - 1)));
+        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(1, Integer.MAX_VALUE).subtract(Fraction.getFraction(1, Integer.MAX_VALUE - 1)));
         f = f1.subtract(f2);
 
         // denominator should not be a multiple of 2 or 3 to trigger overflow
-        assertThrows(
-                ArithmeticException.class,
-                () -> Fraction.getFraction(Integer.MIN_VALUE, 5).subtract(Fraction.getFraction(1, 5)));
+        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(Integer.MIN_VALUE, 5).subtract(Fraction.getFraction(1, 5)));
 
-        assertThrows(
-                ArithmeticException.class, () -> Fraction.getFraction(Integer.MIN_VALUE, 1).subtract(Fraction.ONE));
+        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(Integer.MIN_VALUE, 1).subtract(Fraction.ONE));
 
-        assertThrows(
-                ArithmeticException.class,
-                () -> Fraction.getFraction(Integer.MAX_VALUE, 1).subtract(Fraction.ONE.negate()));
+        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(Integer.MAX_VALUE, 1).subtract(Fraction.ONE.negate()));
 
         // Should overflow
-        assertThrows(
-                ArithmeticException.class,
-                () -> Fraction.getFraction(3, 327680).subtract(Fraction.getFraction(2, 59049)));
+        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(3, 327680).subtract(Fraction.getFraction(2, 59049)));
     }
 
     @Test
@@ -1022,7 +1008,7 @@ public class CommonsLangPortedFractionTest {
         assertTrue(f1.hashCode() != f2.hashCode());
 
         f2 = Fraction.getFraction(6, 10);
-        assertEquals(f1.hashCode(),f2.hashCode());
+        assertEquals(f1.hashCode(), f2.hashCode());
     }
 
     @Test
