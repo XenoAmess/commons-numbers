@@ -595,19 +595,6 @@ public final class Fraction
     }
 
     /**
-     * <p>Gets a fraction that is the inverse (1/fraction) of this one.</p>
-     *
-     * <p>The returned fraction is not reduced.</p>
-     *
-     * @return a new fraction instance with the numerator and denominator
-     *         inverted.
-     * @throws ArithmeticException if the fraction represents zero.
-     */
-    public Fraction invert() {
-        return this.reciprocal();
-    }
-
-    /**
      * Returns the {@code double} value closest to this fraction.
      * This calculates the fraction as numerator divided by denominator.
      *
