@@ -67,21 +67,6 @@ public final class Fraction
     private final int denominator;
 
     /**
-     * Cached output hashCode (class is immutable).
-     */
-    private transient int hashCode = 0;
-
-    /**
-     * Cached output toString (class is immutable).
-     */
-    private transient String toString = null;
-
-    /**
-     * Cached output toProperString (class is immutable).
-     */
-    private transient String toProperString = null;
-
-    /**
      * Private constructor: Instances are created using factory methods.
      *
      * <p>This constructor should only be invoked when the fraction is known
@@ -361,57 +346,6 @@ public final class Fraction
             throw new IllegalArgumentException(FractionException.ERROR_ZERO_DENOMINATOR);
         }
         return new Fraction(value, 0, maxDenominator, DEFAULT_MAX_ITERATIONS);
-    }
-
-    /**
-     * <p>Creates a Fraction from a {@code String}.</p>
-     *
-     * <p>The formats accepted are:</p>
-     *
-     * <ol>
-     *  <li>{@code double} String containing a dot</li>
-     *  <li>'X Y/Z'</li>
-     *  <li>'Y/Z'</li>
-     *  <li>'X' (a simple whole number)</li>
-     * </ol>
-     * <p>and a .</p>
-     *
-     * @param str  the string to parse, must not be {@code null}
-     * @return the new {@code Fraction} instance
-     * @throws NullPointerException if the string is {@code null}
-     * @throws NumberFormatException if the number format is invalid
-     */
-    public static Fraction from(String str) {
-        Objects.requireNonNull(str, "The string must not be null");
-        // parse double format
-        int pos = str.indexOf('.');
-        if (pos >= 0) {
-            return from(Double.parseDouble(str));
-        }
-
-        // parse X Y/Z format
-        pos = str.indexOf(' ');
-        if (pos > 0) {
-            final int whole = Integer.parseInt(str.substring(0, pos));
-            str = str.substring(pos + 1);
-            pos = str.indexOf('/');
-            if (pos < 0) {
-                throw new NumberFormatException("The fraction could not be parsed as the format X Y/Z");
-            }
-            final int numer = Integer.parseInt(str.substring(0, pos));
-            final int denom = Integer.parseInt(str.substring(pos + 1));
-            return of(whole, numer, denom);
-        }
-
-        // parse Y/Z format
-        pos = str.indexOf('/');
-        if (pos < 0) {
-            // simple whole number
-            return of(Integer.parseInt(str), 1);
-        }
-        final int numer = Integer.parseInt(str.substring(0, pos));
-        final int denom = Integer.parseInt(str.substring(pos + 1));
-        return of(numer, denom);
     }
 
     /**
