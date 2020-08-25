@@ -54,8 +54,8 @@ public class CommonsLangPortedFractionTest {
         assertEquals(1, Fraction.ONE_QUARTER.getNumerator());
         assertEquals(4, Fraction.ONE_QUARTER.getDenominator());
 
-        assertEquals(2, Fraction.TWO_QUARTERS.getNumerator());
-        assertEquals(4, Fraction.TWO_QUARTERS.getDenominator());
+        assertEquals(1, Fraction.TWO_QUARTERS.getNumerator());
+        assertEquals(2, Fraction.TWO_QUARTERS.getDenominator());
 
         assertEquals(3, Fraction.THREE_QUARTERS.getNumerator());
         assertEquals(4, Fraction.THREE_QUARTERS.getDenominator());
@@ -84,7 +84,7 @@ public class CommonsLangPortedFractionTest {
 
         f = Fraction.getFraction(0, 2);
         assertEquals(0, f.getNumerator());
-        assertEquals(2, f.getDenominator());
+        assertEquals(1, f.getDenominator());
 
         // normal
         f = Fraction.getFraction(1, 1);
@@ -96,8 +96,8 @@ public class CommonsLangPortedFractionTest {
         assertEquals(1, f.getDenominator());
 
         f = Fraction.getFraction(23, 345);
-        assertEquals(23, f.getNumerator());
-        assertEquals(345, f.getDenominator());
+        assertEquals(1, f.getNumerator());
+        assertEquals(15, f.getDenominator());
 
         // improper
         f = Fraction.getFraction(22, 7);
@@ -106,16 +106,16 @@ public class CommonsLangPortedFractionTest {
 
         // negatives
         f = Fraction.getFraction(-6, 10);
-        assertEquals(-6, f.getNumerator());
-        assertEquals(10, f.getDenominator());
+        assertEquals(-3, f.getNumerator());
+        assertEquals(5, f.getDenominator());
 
         f = Fraction.getFraction(6, -10);
-        assertEquals(-6, f.getNumerator());
-        assertEquals(10, f.getDenominator());
+        assertEquals(3, f.getNumerator());
+        assertEquals(-5, f.getDenominator());
 
         f = Fraction.getFraction(-6, -10);
-        assertEquals(6, f.getNumerator());
-        assertEquals(10, f.getDenominator());
+        assertEquals(-3, f.getNumerator());
+        assertEquals(-5, f.getDenominator());
 
         // zero denominator
         assertThrows(ArithmeticException.class, () -> Fraction.getFraction(1, 0));
@@ -123,8 +123,8 @@ public class CommonsLangPortedFractionTest {
         assertThrows(ArithmeticException.class, () -> Fraction.getFraction(-3, 0));
 
         // very large: can't represent as unsimplified fraction, although
-        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(4, Integer.MIN_VALUE));
-        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(1, Integer.MIN_VALUE));
+        Fraction.getFraction(4, Integer.MIN_VALUE);
+        Fraction.getFraction(1, Integer.MIN_VALUE);
     }
 
     @Test
@@ -134,11 +134,11 @@ public class CommonsLangPortedFractionTest {
         // zero
         f = Fraction.getFraction(0, 0, 2);
         assertEquals(0, f.getNumerator());
-        assertEquals(2, f.getDenominator());
+        assertEquals(1, f.getDenominator());
 
         f = Fraction.getFraction(2, 0, 2);
-        assertEquals(4, f.getNumerator());
-        assertEquals(2, f.getDenominator());
+        assertEquals(2, f.getNumerator());
+        assertEquals(1, f.getDenominator());
 
         f = Fraction.getFraction(0, 1, 2);
         assertEquals(1, f.getNumerator());
@@ -156,8 +156,8 @@ public class CommonsLangPortedFractionTest {
 
         // negative whole
         f = Fraction.getFraction(-1, 6, 10);
-        assertEquals(-16, f.getNumerator());
-        assertEquals(10, f.getDenominator());
+        assertEquals(-8, f.getNumerator());
+        assertEquals(5, f.getDenominator());
 
         assertThrows(ArithmeticException.class, () -> Fraction.getFraction(-1, -6, 10));
         assertThrows(ArithmeticException.class, () -> Fraction.getFraction(-1, 6, -10));
@@ -172,8 +172,8 @@ public class CommonsLangPortedFractionTest {
 
         // very large
         f = Fraction.getFraction(-1, 0, Integer.MAX_VALUE);
-        assertEquals(-Integer.MAX_VALUE, f.getNumerator());
-        assertEquals(Integer.MAX_VALUE, f.getDenominator());
+        assertEquals(-1, f.getNumerator());
+        assertEquals(1, f.getDenominator());
 
         // negative denominators not allowed in this constructor.
         assertThrows(ArithmeticException.class, () -> Fraction.getFraction(0, 4, Integer.MIN_VALUE));
@@ -210,12 +210,12 @@ public class CommonsLangPortedFractionTest {
         assertEquals(5, f.getDenominator());
 
         f = Fraction.getReducedFraction(6, -10);
-        assertEquals(-3, f.getNumerator());
-        assertEquals(5, f.getDenominator());
+        assertEquals(3, f.getNumerator());
+        assertEquals(-5, f.getDenominator());
 
         f = Fraction.getReducedFraction(-6, -10);
-        assertEquals(3, f.getNumerator());
-        assertEquals(5, f.getDenominator());
+        assertEquals(-3, f.getNumerator());
+        assertEquals(-5, f.getDenominator());
 
         // zero denominator
         assertThrows(ArithmeticException.class, () -> Fraction.getReducedFraction(1, 0));
@@ -246,11 +246,11 @@ public class CommonsLangPortedFractionTest {
         // Extreme values
         // OK, can reduce before negating
         f = Fraction.getReducedFraction(-2, Integer.MIN_VALUE);
-        assertEquals(1, f.getNumerator());
-        assertEquals(-(Integer.MIN_VALUE / 2), f.getDenominator());
+        assertEquals(-1, f.getNumerator());
+        assertEquals(Integer.MIN_VALUE / 2, f.getDenominator());
 
         // Can't reduce, negation will throw
-        assertThrows(ArithmeticException.class, () -> Fraction.getReducedFraction(-7, Integer.MIN_VALUE));
+        Fraction.getReducedFraction(-7, Integer.MIN_VALUE);
 
         // LANG-662
         f = Fraction.getReducedFraction(Integer.MIN_VALUE, 2);
@@ -260,10 +260,10 @@ public class CommonsLangPortedFractionTest {
 
     @Test
     public void testFactory_double() {
-        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(Double.NaN));
-        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(Double.POSITIVE_INFINITY));
-        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(Double.NEGATIVE_INFINITY));
-        assertThrows(ArithmeticException.class, () -> Fraction.getFraction((double) Integer.MAX_VALUE + 1));
+        assertThrows(IllegalArgumentException.class, () -> Fraction.getFraction(Double.NaN));
+        assertThrows(IllegalArgumentException.class, () -> Fraction.getFraction(Double.POSITIVE_INFINITY));
+        assertThrows(IllegalArgumentException.class, () -> Fraction.getFraction(Double.NEGATIVE_INFINITY));
+        Fraction.getFraction((double) Integer.MAX_VALUE + 1);
 
         // zero
         Fraction f = Fraction.getFraction(0.0d);
@@ -297,8 +297,8 @@ public class CommonsLangPortedFractionTest {
 
         // small
         f = Fraction.getFraction(1.0d/10001d);
-        assertEquals(0, f.getNumerator());
-        assertEquals(1, f.getDenominator());
+        assertEquals(1, f.getNumerator());
+        assertEquals(10001, f.getDenominator());
 
         // normal
         Fraction f2 = null;
@@ -314,7 +314,7 @@ public class CommonsLangPortedFractionTest {
         // save time by skipping some tests!  (
         for (int i = 1001; i <= 10000; i+=SKIP) {  // denominator
             for (int j = 1; j <= i; j++) {  // numerator
-                f = Fraction.getFraction((double) j / (double) i);
+                f = Fraction.getFraction((double) j / (double) i, 1e-8, 100);
                 f2 = Fraction.getReducedFraction(j, i);
                 assertEquals(f2.getNumerator(), f.getNumerator());
                 assertEquals(f2.getDenominator(), f.getDenominator());
@@ -370,16 +370,16 @@ public class CommonsLangPortedFractionTest {
         assertEquals(2, f.getDenominator());
 
         f = Fraction.getFraction("1 2/4");
-        assertEquals(6, f.getNumerator());
-        assertEquals(4, f.getDenominator());
+        assertEquals(3, f.getNumerator());
+        assertEquals(2, f.getDenominator());
 
         f = Fraction.getFraction("-7 1/2");
         assertEquals(-15, f.getNumerator());
         assertEquals(2, f.getDenominator());
 
         f = Fraction.getFraction("-1 2/4");
-        assertEquals(-6, f.getNumerator());
-        assertEquals(4, f.getDenominator());
+        assertEquals(-3, f.getNumerator());
+        assertEquals(2, f.getDenominator());
 
         assertThrows(NumberFormatException.class, () -> Fraction.getFraction("2 3"));
         assertThrows(NumberFormatException.class, () -> Fraction.getFraction("a 3"));
@@ -414,8 +414,8 @@ public class CommonsLangPortedFractionTest {
         assertEquals(3, f.getDenominator());
 
         f = Fraction.getFraction("2/4");
-        assertEquals(2, f.getNumerator());
-        assertEquals(4, f.getDenominator());
+        assertEquals(1, f.getNumerator());
+        assertEquals(2, f.getDenominator());
 
         assertThrows(NumberFormatException.class, () -> Fraction.getFraction("2/d"));
         assertThrows(NumberFormatException.class, () -> Fraction.getFraction("2e/3"));
@@ -512,8 +512,8 @@ public class CommonsLangPortedFractionTest {
 
         f = Fraction.getFraction(50, 75);
         f = f.invert();
-        assertEquals(75, f.getNumerator());
-        assertEquals(50, f.getDenominator());
+        assertEquals(3, f.getNumerator());
+        assertEquals(2, f.getDenominator());
 
         f = Fraction.getFraction(4, 3);
         f = f.invert();
@@ -522,11 +522,11 @@ public class CommonsLangPortedFractionTest {
 
         f = Fraction.getFraction(-15, 47);
         f = f.invert();
-        assertEquals(-47, f.getNumerator());
-        assertEquals(15, f.getDenominator());
+        assertEquals(47, f.getNumerator());
+        assertEquals(-15, f.getDenominator());
 
         assertThrows(ArithmeticException.class, () -> Fraction.getFraction(0, 3).invert());
-        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(Integer.MIN_VALUE, 1).invert());
+        Fraction.getFraction(Integer.MIN_VALUE, 1).invert();
 
         f = Fraction.getFraction(Integer.MAX_VALUE, 1);
         f = f.invert();
@@ -540,13 +540,13 @@ public class CommonsLangPortedFractionTest {
 
         f = Fraction.getFraction(50, 75);
         f = f.negate();
-        assertEquals(-50, f.getNumerator());
-        assertEquals(75, f.getDenominator());
+        assertEquals(-2, f.getNumerator());
+        assertEquals(3, f.getDenominator());
 
         f = Fraction.getFraction(-50, 75);
         f = f.negate();
-        assertEquals(50, f.getNumerator());
-        assertEquals(75, f.getDenominator());
+        assertEquals(2, f.getNumerator());
+        assertEquals(3, f.getDenominator());
 
         // large values
         f = Fraction.getFraction(Integer.MAX_VALUE-1, Integer.MAX_VALUE);
@@ -554,7 +554,7 @@ public class CommonsLangPortedFractionTest {
         assertEquals(Integer.MIN_VALUE+2, f.getNumerator());
         assertEquals(Integer.MAX_VALUE, f.getDenominator());
 
-        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(Integer.MIN_VALUE, 1).negate());
+        Fraction.getFraction(Integer.MIN_VALUE, 1).negate();
     }
 
     @Test
@@ -563,13 +563,13 @@ public class CommonsLangPortedFractionTest {
 
         f = Fraction.getFraction(50, 75);
         f = f.abs();
-        assertEquals(50, f.getNumerator());
-        assertEquals(75, f.getDenominator());
+        assertEquals(2, f.getNumerator());
+        assertEquals(3, f.getDenominator());
 
         f = Fraction.getFraction(-50, 75);
         f = f.abs();
-        assertEquals(50, f.getNumerator());
-        assertEquals(75, f.getDenominator());
+        assertEquals(2, f.getNumerator());
+        assertEquals(3, f.getDenominator());
 
         f = Fraction.getFraction(Integer.MAX_VALUE, 1);
         f = f.abs();
@@ -578,10 +578,10 @@ public class CommonsLangPortedFractionTest {
 
         f = Fraction.getFraction(Integer.MAX_VALUE, -1);
         f = f.abs();
-        assertEquals(Integer.MAX_VALUE, f.getNumerator());
-        assertEquals(1, f.getDenominator());
+        assertEquals(-Integer.MAX_VALUE, f.getNumerator());
+        assertEquals(-1, f.getDenominator());
 
-        assertThrows(ArithmeticException.class, () -> Fraction.getFraction(Integer.MIN_VALUE, 1).abs());
+        Fraction.getFraction(Integer.MIN_VALUE, 1).abs();
     }
 
     @Test
@@ -621,7 +621,7 @@ public class CommonsLangPortedFractionTest {
 
         f = Fraction.getFraction(6, 10);
         assertEquals(f, f.pow(1));
-        assertNotEquals(f.pow(1), Fraction.getFraction(3, 5));
+        assertEquals(f.pow(1), Fraction.getFraction(3, 5));
 
         f = Fraction.getFraction(6, 10);
         f = f.pow(2);
@@ -635,8 +635,8 @@ public class CommonsLangPortedFractionTest {
 
         f = Fraction.getFraction(6, 10);
         f = f.pow(-1);
-        assertEquals(10, f.getNumerator());
-        assertEquals(6, f.getDenominator());
+        assertEquals(5, f.getNumerator());
+        assertEquals(3, f.getDenominator());
 
         f = Fraction.getFraction(6, 10);
         f = f.pow(-2);
@@ -648,7 +648,7 @@ public class CommonsLangPortedFractionTest {
         f = f.pow(1);
         assertEquals(0, f.compareTo(Fraction.ZERO));
         assertEquals(0, f.getNumerator());
-        assertEquals(1231, f.getDenominator());
+        assertEquals(1, f.getDenominator());
         f = f.pow(2);
         assertEquals(0, f.compareTo(Fraction.ZERO));
         assertEquals(0, f.getNumerator());
@@ -1008,7 +1008,7 @@ public class CommonsLangPortedFractionTest {
         assertEquals(f1, f2);
 
         f2 = Fraction.getFraction(6, 10);
-        assertNotEquals(f1, f2);
+        assertEquals(f1, f2);
     }
 
     @Test
@@ -1022,7 +1022,7 @@ public class CommonsLangPortedFractionTest {
         assertTrue(f1.hashCode() != f2.hashCode());
 
         f2 = Fraction.getFraction(6, 10);
-        assertTrue(f1.hashCode() != f2.hashCode());
+        assertEquals(f1.hashCode(),f2.hashCode());
     }
 
     @Test
@@ -1064,26 +1064,26 @@ public class CommonsLangPortedFractionTest {
 
         f = Fraction.getFraction(3, 5);
         final String str = f.toString();
-        assertEquals("3/5", str);
+        assertEquals("3 / 5", str);
         assertSame(str, f.toString());
 
         f = Fraction.getFraction(7, 5);
-        assertEquals("7/5", f.toString());
+        assertEquals("7 / 5", f.toString());
 
         f = Fraction.getFraction(4, 2);
-        assertEquals("4/2", f.toString());
+        assertEquals("2", f.toString());
 
         f = Fraction.getFraction(0, 2);
-        assertEquals("0/2", f.toString());
+        assertEquals("0", f.toString());
 
         f = Fraction.getFraction(2, 2);
-        assertEquals("2/2", f.toString());
+        assertEquals("1", f.toString());
 
         f = Fraction.getFraction(Integer.MIN_VALUE, 0, 1);
-        assertEquals("-2147483648/1", f.toString());
+        assertEquals("-2147483648", f.toString());
 
         f = Fraction.getFraction(-1, 1, Integer.MAX_VALUE);
-        assertEquals("-2147483648/2147483647", f.toString());
+        assertEquals("-2147483648 / 2147483647", f.toString());
     }
 
     @Test
@@ -1099,7 +1099,7 @@ public class CommonsLangPortedFractionTest {
         assertEquals("1 2/5", f.toProperString());
 
         f = Fraction.getFraction(14, 10);
-        assertEquals("1 4/10", f.toProperString());
+        assertEquals("1 2/5", f.toProperString());
 
         f = Fraction.getFraction(4, 2);
         assertEquals("2", f.toProperString());
