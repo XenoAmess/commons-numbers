@@ -589,7 +589,7 @@ public class CommonsLangPortedFractionTest {
         assertEquals(Fraction.ONE, f.pow(0));
 
         f = Fraction.of(3, 5);
-        assertSame(f, f.pow(1));
+        assertEquals(f, f.pow(1));
         assertEquals(f, f.pow(1));
 
         f = Fraction.of(3, 5);
