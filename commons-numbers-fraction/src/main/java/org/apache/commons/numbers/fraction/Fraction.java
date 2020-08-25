@@ -968,53 +968,15 @@ public final class Fraction
      */
     @Override
     public String toString() {
-        if (this.toString == null) {
-            if (isZero()) {
-                this.toString = "0";
-            } else if (denominator == 1) {
-                this.toString = Integer.toString(numerator);
-            } else {
-                this.toString = numerator + " / " + denominator;
-            }
+        final String str;
+        if (isZero()) {
+            str = "0";
+        } else if (denominator == 1) {
+            str = Integer.toString(numerator);
+        } else {
+            str = numerator + " / " + denominator;
         }
-        return this.toString;
-    }
-
-    /**
-     * Returns the {@code String} representing this fraction.
-     * Uses:
-     * <ul>
-     *  <li>{@code "0"} if {@code numerator} is zero.
-     *  <li>{@code "numerator"} if {@code denominator} is one.
-     *  <li>{@code "numerator / denominator"} for all other cases.
-     * </ul>
-     *
-     * @return a string representation of the fraction.
-     */
-    public String toProperString() {
-        if (this.toProperString == null) {
-            if (numerator == 0) {
-                this.toProperString = "0";
-            } else if (numerator == denominator) {
-                this.toProperString = "1";
-            } else if (numerator == -1 * denominator) {
-                this.toProperString = "-1";
-            } else if ((numerator > 0 ? -numerator : numerator) < -denominator) {
-                // note that we do the magnitude comparison test above with
-                // NEGATIVE (not positive) numbers, since negative numbers
-                // have a larger range. otherwise numerator==Integer.MIN_VALUE
-                // is handled incorrectly.
-                final int properNumerator = getProperNumerator();
-                if (properNumerator == 0) {
-                    this.toProperString = Integer.toString(getProperWhole());
-                } else {
-                    this.toProperString = getProperWhole() + " " + properNumerator + "/" + getDenominator();
-                }
-            } else {
-                this.toProperString = getNumerator() + "/" + getDenominator();
-            }
-        }
-        return this.toProperString;
+        return str;
     }
 
     /**
