@@ -925,32 +925,4 @@ public final class Fraction
     private boolean isZero() {
         return numerator == 0;
     }
-
-    /**
-     * <p>Try to make the returned Fraction's denominator larger than 0 if possible.</p>
-     *
-     * <p>For example,
-     * <pre>
-     *     -1/-2 to 1/2
-     *     -1/2 to -1/2
-     *     1/-2 to -1/2
-     * </pre>
-     *
-     * @return a new reduced fraction instance, or this if no simplification possible
-     */
-    public Fraction reduce() {
-        if (this.denominator == Integer.MIN_VALUE) {
-            return this;
-        }
-        if (this.denominator >= 0) {
-            return this;
-        }
-        if (this.numerator == Integer.MIN_VALUE) {
-            return this;
-        }
-        if (this.numerator == 0) {
-            return ZERO;
-        }
-        return new Fraction(-this.numerator, -this.denominator);
-    }
 }
