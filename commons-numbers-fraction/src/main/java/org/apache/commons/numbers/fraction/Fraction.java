@@ -56,9 +56,6 @@ public final class Fraction
     /** The overflow limit for conversion from a double (2^31). */
     private static final long OVERFLOW = 1L << 31;
 
-    /** The denominator must not be zero String. */
-    private static final String STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO = "The denominator must not be zero";
-
     /** The numerator of this fraction reduced to lowest terms. */
     private final int numerator;
 
@@ -778,46 +775,19 @@ public final class Fraction
      */
     @Override
     public Fraction pow(final int exponent) {
-        if (exponent == 1) {
-            return this;
-        }
         if (exponent == 0) {
             return ONE;
         }
-        if (exponent == -1) {
-            return this.reciprocal();
+        if (isZero()) {
+            return ZERO;
         }
-        if (this.denominator == 0) {
-            if (exponent > 0) {
-                throw new ArithmeticException(STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO);
-            } else {
-                return ZERO;
-            }
+
+        if (exponent < 0) {
+            return new Fraction(ArithmeticUtils.pow(denominator, -exponent),
+                                ArithmeticUtils.pow(numerator,   -exponent));
         }
-        if (this.numerator == 0) {
-            if (exponent < 0) {
-                throw new ArithmeticException(STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO);
-            } else {
-                return ZERO;
-            }
-        }
-        if (exponent > 0) {
-            return new Fraction(
-                    ArithmeticUtils.pow(this.numerator, exponent),
-                    ArithmeticUtils.pow(this.denominator, exponent)
-            );
-        }
-        if (exponent == Integer.MIN_VALUE) {
-            final int tmp = -(exponent / 2);
-            return new Fraction(
-                    ArithmeticUtils.pow(ArithmeticUtils.pow(this.denominator, 2), tmp),
-                    ArithmeticUtils.pow(ArithmeticUtils.pow(this.numerator, 2), tmp)
-            );
-        }
-        return new Fraction(
-                ArithmeticUtils.pow(this.denominator, -exponent),
-                ArithmeticUtils.pow(this.numerator, -exponent)
-        );
+        return new Fraction(ArithmeticUtils.pow(numerator,   exponent),
+                            ArithmeticUtils.pow(denominator, exponent));
     }
 
     /**
