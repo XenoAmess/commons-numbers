@@ -444,44 +444,6 @@ public final class Fraction
     }
 
     /**
-     * <p>Creates a {@code Fraction} instance with the 3 parts
-     * of a fraction X Y/Z.</p>
-     *
-     * <p>The negative sign must be passed in on the whole number part.</p>
-     *
-     * @param whole  the whole number, for example the one in 'one and three sevenths'
-     * @param numerator  the numerator, for example the three in 'one and three sevenths'
-     * @param denominator  the denominator, for example the seven in 'one and three sevenths'
-     * @return a new fraction instance
-     * @throws ArithmeticException if the denominator is {@code zero}
-     * @throws ArithmeticException if the denominator is negative
-     * @throws ArithmeticException if the numerator is negative
-     * @throws ArithmeticException if the resulting numerator exceeds
-     *  {@code Integer.MAX_VALUE}
-     */
-    public static Fraction of(final int whole, final int numerator, final int denominator) {
-        if (denominator == 0) {
-            throw new ArithmeticException(STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO);
-        }
-        if (denominator < 0) {
-            throw new ArithmeticException(STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO);
-        }
-        if (numerator < 0) {
-            throw new ArithmeticException(STRING_THE_DENOMINATOR_MUST_NOT_BE_ZERO);
-        }
-        long numeratorValue;
-        if (whole < 0) {
-            numeratorValue = whole * (long) denominator - numerator;
-        } else {
-            numeratorValue = whole * (long) denominator + numerator;
-        }
-        if (numeratorValue < Integer.MIN_VALUE || numeratorValue > Integer.MAX_VALUE) {
-            throw new ArithmeticException("Numerator too large to represent as an Integer.");
-        }
-        return new Fraction((int) numeratorValue, denominator);
-    }
-
-    /**
      * Returns a {@code Fraction} instance representing the specified string {@code s}.
      *
      * <p>If {@code s} is {@code null}, then a {@code NullPointerException} is thrown.
