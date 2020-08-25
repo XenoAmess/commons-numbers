@@ -601,36 +601,6 @@ public final class Fraction
     }
 
     /**
-     * <p>Gets the proper whole part of the fraction.</p>
-     *
-     * <p>An improper fraction 7/4 can be resolved into a proper one, 1 3/4.
-     * This method returns the 1 from the proper fraction.</p>
-     *
-     * <p>If the fraction is negative such as -7/4, it can be resolved into
-     * -1 3/4, so this method returns the positive whole part -1.</p>
-     *
-     * @return the whole fraction part of a proper fraction, that includes the sign
-     */
-    public int getProperWhole() {
-        return numerator / denominator;
-    }
-
-    /**
-     * <p>Gets the proper numerator, always positive.</p>
-     *
-     * <p>An improper fraction 7/4 can be resolved into a proper one, 1 3/4.
-     * This method returns the 3 from the proper fraction.</p>
-     *
-     * <p>If the fraction is negative such as -7/4, it can be resolved into
-     * -1 3/4, so this method returns the positive proper numerator, 3.</p>
-     *
-     * @return the numerator fraction part of a proper fraction, always positive
-     */
-    public int getProperNumerator() {
-        return Math.abs(numerator % denominator);
-    }
-
-    /**
      * Adds the specified {@code value} to this fraction, returning
      * the result in reduced form.
      *
