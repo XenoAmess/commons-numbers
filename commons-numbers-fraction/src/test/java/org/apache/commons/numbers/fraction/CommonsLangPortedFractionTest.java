@@ -39,35 +39,35 @@ public class CommonsLangPortedFractionTest {
         assertEquals(1, Fraction.ONE.getNumerator());
         assertEquals(1, Fraction.ONE.getDenominator());
 
-        assertEquals(1, Fraction.ONE_HALF.getNumerator());
-        assertEquals(2, Fraction.ONE_HALF.getDenominator());
-
-        assertEquals(1, Fraction.ONE_THIRD.getNumerator());
-        assertEquals(3, Fraction.ONE_THIRD.getDenominator());
-
-        assertEquals(2, Fraction.TWO_THIRDS.getNumerator());
-        assertEquals(3, Fraction.TWO_THIRDS.getDenominator());
-
-        assertEquals(1, Fraction.ONE_QUARTER.getNumerator());
-        assertEquals(4, Fraction.ONE_QUARTER.getDenominator());
-
-        assertEquals(1, Fraction.TWO_QUARTERS.getNumerator());
-        assertEquals(2, Fraction.TWO_QUARTERS.getDenominator());
-
-        assertEquals(3, Fraction.THREE_QUARTERS.getNumerator());
-        assertEquals(4, Fraction.THREE_QUARTERS.getDenominator());
-
-        assertEquals(1, Fraction.ONE_FIFTH.getNumerator());
-        assertEquals(5, Fraction.ONE_FIFTH.getDenominator());
-
-        assertEquals(2, Fraction.TWO_FIFTHS.getNumerator());
-        assertEquals(5, Fraction.TWO_FIFTHS.getDenominator());
-
-        assertEquals(3, Fraction.THREE_FIFTHS.getNumerator());
-        assertEquals(5, Fraction.THREE_FIFTHS.getDenominator());
-
-        assertEquals(4, Fraction.FOUR_FIFTHS.getNumerator());
-        assertEquals(5, Fraction.FOUR_FIFTHS.getDenominator());
+//        assertEquals(1, Fraction.ONE_HALF.getNumerator());
+//        assertEquals(2, Fraction.ONE_HALF.getDenominator());
+//
+//        assertEquals(1, Fraction.ONE_THIRD.getNumerator());
+//        assertEquals(3, Fraction.ONE_THIRD.getDenominator());
+//
+//        assertEquals(2, Fraction.TWO_THIRDS.getNumerator());
+//        assertEquals(3, Fraction.TWO_THIRDS.getDenominator());
+//
+//        assertEquals(1, Fraction.ONE_QUARTER.getNumerator());
+//        assertEquals(4, Fraction.ONE_QUARTER.getDenominator());
+//
+//        assertEquals(1, Fraction.TWO_QUARTERS.getNumerator());
+//        assertEquals(2, Fraction.TWO_QUARTERS.getDenominator());
+//
+//        assertEquals(3, Fraction.THREE_QUARTERS.getNumerator());
+//        assertEquals(4, Fraction.THREE_QUARTERS.getDenominator());
+//
+//        assertEquals(1, Fraction.ONE_FIFTH.getNumerator());
+//        assertEquals(5, Fraction.ONE_FIFTH.getDenominator());
+//
+//        assertEquals(2, Fraction.TWO_FIFTHS.getNumerator());
+//        assertEquals(5, Fraction.TWO_FIFTHS.getDenominator());
+//
+//        assertEquals(3, Fraction.THREE_FIFTHS.getNumerator());
+//        assertEquals(5, Fraction.THREE_FIFTHS.getDenominator());
+//
+//        assertEquals(4, Fraction.FOUR_FIFTHS.getNumerator());
+//        assertEquals(5, Fraction.FOUR_FIFTHS.getDenominator());
     }
 
     @Test
@@ -749,7 +749,7 @@ public class CommonsLangPortedFractionTest {
         assertEquals(1934917632, f.getDenominator());
 
         f1 = Fraction.getFraction(Integer.MIN_VALUE, 3);
-        f2 = Fraction.ONE_THIRD;
+        f2 = Fraction.getFraction(1, 3);
         f = f1.add(f2);
         assertEquals(Integer.MIN_VALUE + 1, f.getNumerator());
         assertEquals(3, f.getDenominator());
@@ -842,7 +842,7 @@ public class CommonsLangPortedFractionTest {
         assertEquals(1934917632, f.getDenominator());
 
         f1 = Fraction.getFraction(Integer.MIN_VALUE, 3);
-        f2 = Fraction.ONE_THIRD.negate();
+        f2 = Fraction.getFraction(1, 3).negate();
         f = f1.subtract(f2);
         assertEquals(Integer.MIN_VALUE + 1, f.getNumerator());
         assertEquals(3, f.getDenominator());

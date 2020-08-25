@@ -42,47 +42,6 @@ public final class Fraction
     /** A fraction representing "1". */
     public static final Fraction ONE = new Fraction(1);
 
-    /**
-     * {@code Fraction} representation of 1/2.
-     */
-    public static final Fraction ONE_HALF = new Fraction(1, 2);
-    /**
-     * {@code Fraction} representation of 1/3.
-     */
-    public static final Fraction ONE_THIRD = new Fraction(1, 3);
-    /**
-     * {@code Fraction} representation of 2/3.
-     */
-    public static final Fraction TWO_THIRDS = new Fraction(2, 3);
-    /**
-     * {@code Fraction} representation of 1/4.
-     */
-    public static final Fraction ONE_QUARTER = new Fraction(1, 4);
-    /**
-     * {@code Fraction} representation of 2/4.
-     */
-    public static final Fraction TWO_QUARTERS = new Fraction(2, 4);
-    /**
-     * {@code Fraction} representation of 3/4.
-     */
-    public static final Fraction THREE_QUARTERS = new Fraction(3, 4);
-    /**
-     * {@code Fraction} representation of 1/5.
-     */
-    public static final Fraction ONE_FIFTH = new Fraction(1, 5);
-    /**
-     * {@code Fraction} representation of 2/5.
-     */
-    public static final Fraction TWO_FIFTHS = new Fraction(2, 5);
-    /**
-     * {@code Fraction} representation of 3/5.
-     */
-    public static final Fraction THREE_FIFTHS = new Fraction(3, 5);
-    /**
-     * {@code Fraction} representation of 4/5.
-     */
-    public static final Fraction FOUR_FIFTHS = new Fraction(4, 5);
-
     /** Serializable version identifier. */
     private static final long serialVersionUID = 20190701L;
 
