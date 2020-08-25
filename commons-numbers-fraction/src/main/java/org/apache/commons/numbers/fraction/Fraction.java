@@ -971,19 +971,16 @@ public final class Fraction
 
     @Override
     public int hashCode() {
-        if (this.hashCode == 0) {
-            // Incorporate the sign and absolute values of the numerator and denominator.
-            // Equivalent to:
-            // int hash = 1;
-            // hash = 31 * hash + Math.abs(numerator);
-            // hash = 31 * hash + Math.abs(denominator);
-            // hash = hash * signum()
-            // Note: x * Integer.signum(x) == Math.abs(x).
-            final int numS = Integer.signum(numerator);
-            final int denS = Integer.signum(denominator);
-            this.hashCode = (31 * (31 + numerator * numS) + denominator * denS) * numS * denS;
-        }
-        return this.hashCode;
+        // Incorporate the sign and absolute values of the numerator and denominator.
+        // Equivalent to:
+        // int hash = 1;
+        // hash = 31 * hash + Math.abs(numerator);
+        // hash = 31 * hash + Math.abs(denominator);
+        // hash = hash * signum()
+        // Note: x * Integer.signum(x) == Math.abs(x).
+        final int numS = Integer.signum(numerator);
+        final int denS = Integer.signum(denominator);
+        return (31 * (31 + numerator * numS) + denominator * denS) * numS * denS;
     }
 
     /**
